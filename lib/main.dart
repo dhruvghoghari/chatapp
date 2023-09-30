@@ -1,7 +1,10 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:chatapp/NotificationExample.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'Chats.dart';
+import 'CloudNotification.dart';
 import 'HomeScreen.dart';
 import 'Login.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -14,7 +17,7 @@ void main() async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await AwesomeNotifications().initialize(
-      null,
+      'resource://drawable/logo',    // Notification logo
       [
         NotificationChannel(
             channelKey: 'alerts',
@@ -51,7 +54,33 @@ void main() async{
             ledColor: Colors.red),
       ],
       debug: true);
+  await FirebaseMessaging.instance.getToken().then((token) async{   // Token Generate
+    SharedPreferences prefs=await SharedPreferences.getInstance();
+    prefs.setString("token", token.toString());
+  });
+
+  FirebaseMessaging.onMessage.listen(showFlutterNotification);
+
+
   runApp(const MyApp());
+}
+void showFlutterNotification(RemoteMessage message) {
+  RemoteNotification? notification = message.notification;
+  AndroidNotification? android = message.notification?.android;
+  if (notification != null && android != null) {
+
+    var firebasetitle  = notification.title.toString();
+    var firebasebody = notification.body.toString();
+
+    AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: 10,
+          channelKey: 'alerts',
+          title: firebasetitle,
+          body: firebasebody,
+        )
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {

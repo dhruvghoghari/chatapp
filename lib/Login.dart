@@ -98,7 +98,6 @@ class _LoginState extends State<Login> {
 
                           // firebase Insert data
 
-
                           //check
                           await FirebaseFirestore.instance.collection("user").where("email",isEqualTo: email).get().then((documents) async{
                             if(documents.size <=0 )
@@ -119,8 +118,6 @@ class _LoginState extends State<Login> {
                                     ),
                                   );
                                 });
-
-
                               }
                             else
                               {

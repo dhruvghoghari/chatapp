@@ -45,9 +45,10 @@ dependencies:
   shared_preferences:
   emoji_picker_flutter:
   image_picker:
-  awesome_notifications:
+  awesome_notifications: ^0.6.21
   firebase_storage:
   uuid:
+  firebase_messaging:
 
 dev_dependencies:
   build_runner:
