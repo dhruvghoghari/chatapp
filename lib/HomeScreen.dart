@@ -18,7 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
   var photo ="";
   var googleid ="";
 
-
   getdata() async
   {
     SharedPreferences prefs =await SharedPreferences.getInstance();
@@ -46,10 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.logout),
             onPressed: () async{
 
-              SharedPreferences prefs = await SharedPreferences.getInstance();
+              SharedPreferences prefs = await SharedPreferences.getInstance(); // shared Prefrense clear
               prefs.clear();
 
-              GoogleSignIn googleSignIn = GoogleSignIn();
+              GoogleSignIn googleSignIn = GoogleSignIn();                       // Google sign out
               googleSignIn.signOut();
 
               Navigator.pop(context);

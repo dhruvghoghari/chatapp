@@ -6,14 +6,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
 
   @override
   State<Login> createState() => _LoginState();
 }
-
 class _LoginState extends State<Login> {
-  final FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;   // creat the object login
 
   @override
   Widget build(BuildContext context) {
@@ -54,17 +52,6 @@ class _LoginState extends State<Login> {
                       ),
                     ],
                   ),
-                  // SizedBox(height: 10.0),
-                  // Row(
-                  //   children: [
-                  //     SizedBox(width: 100.0,),
-                  //     Image.asset("img/fb.png",width: 70.0,),
-                  //     Image.asset("img/gp.png"),
-                  //     Image.asset("img/apple.png"),
-                  //   ],
-                  // ),
-                  // SizedBox(height: 20.0),
-                  // Image.asset("img/OR (2).png"),
                   SizedBox(height: 120.0),
                   Container(
                     width: 320.0,
@@ -96,7 +83,6 @@ class _LoginState extends State<Login> {
                           prefs.setString("photo",photo);
                           prefs.setString("googleid",googleid);
 
-                          // firebase Insert data
 
                           //check
                           await FirebaseFirestore.instance.collection("user").where("email",isEqualTo: email).get().then((documents) async{

@@ -465,6 +465,7 @@ class _ChatsState extends State<Chats> {
                             "type":"text",
                             "datetime":DateTime.now().millisecondsSinceEpoch
                           }).then((value) async{
+
                             await FirebaseFirestore.instance.collection("user").doc(widget.receiverid)
                                 .collection("chats").doc(senderid).collection("message").add({
                               "senderid":senderid,
