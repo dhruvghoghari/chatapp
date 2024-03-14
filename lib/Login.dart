@@ -45,7 +45,6 @@ class _LoginState extends State<Login> {
                         padding: const EdgeInsets.all(20.0),
                         child: Row(
                           children: [
-                            // SizedBox(width: 40.0,),
                             Image.asset("img/chatt.png")
                           ],
                         ),
@@ -84,7 +83,7 @@ class _LoginState extends State<Login> {
                           prefs.setString("googleid",googleid);
 
 
-                          //check
+                          //check email already exist in firebase than add new user otherwise redirect homepage
                           await FirebaseFirestore.instance.collection("user").where("email",isEqualTo: email).get().then((documents) async{
                             if(documents.size <=0 )
                               {
@@ -95,6 +94,7 @@ class _LoginState extends State<Login> {
                                   "googleid":googleid,
                                 }).then((document) async{
 
+                                  // get sender id.1
                                   SharedPreferences prefs=await SharedPreferences.getInstance();
                                   prefs.setString("senderid", document.id.toString());
 
@@ -107,6 +107,8 @@ class _LoginState extends State<Login> {
                               }
                             else
                               {
+
+                                // get sender id.2
                                 SharedPreferences prefs=await SharedPreferences.getInstance();
                                 prefs.setString("senderid", documents.docs.first.id.toString());
 
@@ -118,7 +120,6 @@ class _LoginState extends State<Login> {
                               }
                           });
                         }
-
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Colors.white,

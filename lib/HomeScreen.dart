@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                StreamBuilder(
+                StreamBuilder(                                            // user already login less other user login in show
                     stream: FirebaseFirestore.instance.collection("user").where("email",isNotEqualTo: email).snapshots(),
                     builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot)
                     {
@@ -114,13 +114,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                       var em = document["email"].toString();
                                       var pt = document["photo"].toString();
 
-
                                       Navigator.of(context).push(
                                         MaterialPageRoute(builder: (context) => Chats(
                                           name:nm,
                                           email: em,
                                           photo:pt,
-                                          receiverid: document.id.toString(),
+                                          receiverid: document.id.toString()
                                         ))
                                       );
                                     },

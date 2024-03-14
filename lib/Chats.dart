@@ -452,8 +452,7 @@ class _ChatsState extends State<Chats> {
                       if(msg.length!=0)
                         {
                           _message.text="";
-                          _scrollController.animateTo(
-                            _scrollController.position.minScrollExtent,
+                          _scrollController.animateTo(_scrollController.position.minScrollExtent,
                             curve: Curves.easeInOut,
                             duration: const Duration(milliseconds: 1),
                           );
